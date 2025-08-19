@@ -4,7 +4,7 @@ import "./style.css";
 
 export function NotFound(){
     const errData = useRouteError();
-    
+
     return(
         <>
         <div className="errCont">

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, Router, RouterProvider } from "react-router";
 import ProductList from './components/ProuctList.jsx';
-import { ProductDetail } from './components/ProductDeatil.jsx';   
+import { ProductDetails } from './components/ProductDetails.jsx';
 import { Home } from './components/Home.jsx';
 import { NotFound } from './components/Notfound.jsx';
 
@@ -23,7 +23,7 @@ const route = createBrowserRouter([
       },
       {
         path:"/product/:product",
-        element: <ProductDetail/>
+        element: <ProductDetails/>
       },
       {
         path: "/",
