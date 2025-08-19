@@ -15,10 +15,14 @@ export function ProductDetails() {
             async function fetchData(){
             try{
                 const data = await fetch("https://dummyjson.com/products");
+                if (!data.ok) {
+                    throw new Error(`HTTP error! status: ${data.status}`);
+                }
                 const result = await data.json();
                 setData(result);
             }catch(err){
-                alert("Error occured", err);
+                alert("Error occured");
+                console.error("error loading the data", err)
             }finally{
                 loadStatus(false)
             }
