@@ -15,8 +15,12 @@ export function ProductItem(data){
             <Link key={item.id} to={`/product/${ind}`} state={[newData, newLoad]}>
             <div key={item.id} className="prduct-card">
                 <img src={item.thumbnail} alt="" />
-                <p className="title">{item.title}</p>
-                <p className="price">{item.price}</p>
+                <p className="title" style={{textAlign:"center", fontSize:"1.4rem"}}>{item.title}</p>
+                <div className="product-txt">
+                    <p className="price" style={{fontSize:'1.2rem', color:"black"}}>$ {item.price}</p>
+                    <p className="rating" style={{color:"gray"}}>{item.rating}</p>
+                </div>
+                <p style={{textAlign:'left', color:"black"}}>View Details..</p>
             </div>
             </Link>
         )}
