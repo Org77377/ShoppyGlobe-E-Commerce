@@ -14,9 +14,12 @@ function Header() {
 
     return (
         <>
+        {/* mobile responsive header navigation menu */}
             <div className="navbar-container">
                 <div className="nav-logo">
-                    <p><b>Shoppy Store</b></p>
+                    <Link to={"/"}>
+                    <p style={{color: "blue"}}><b>Shoppy Store</b></p>
+                    </Link>
                 </div>
 
                 <div className="hamburger" onClick={toggleNav}>
@@ -25,7 +28,7 @@ function Header() {
                     <span></span>
                 </div>
 
-                <div className={`nav-items ${isOpen ? "open" : ""}`}>
+                <div className={`nav-items ${isOpen ? "open" : ""}`} >
                     <ul>
                         <Link to={"/home"}>
                             <li>Home</li>

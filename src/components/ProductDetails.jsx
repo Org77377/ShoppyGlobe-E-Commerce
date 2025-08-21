@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../reduxStore/features/cartSlice';
 
-export function ProductDetails() {
+function ProductDetails() {
     const {product} = useParams();
     // const location = useLocation();
     // const state = location.state[0].products;
@@ -71,3 +71,5 @@ export function ProductDetails() {
         </>
     );
 }
+
+export default ProductDetails;
