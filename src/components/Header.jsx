@@ -1,15 +1,31 @@
 import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router";
+import { useSelector } from 'react-redux';
+import { useState } from "react";
 import "./style.css";
 
-function Header(){
-    return(
-        <> 
+
+function Header() {
+
+    const cartItems = useSelector(state => state.cart.cartItems);
+    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleNav = () => setIsOpen(!isOpen);
+
+    return (
+        <>
             <div className="navbar-container">
                 <div className="nav-logo">
                     <p><b>Shoppy Store</b></p>
                 </div>
-                <div className="nav-items">
+
+                <div className="hamburger" onClick={toggleNav}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div className={`nav-items ${isOpen ? "open" : ""}`}>
                     <ul>
                         <Link to={"/home"}>
                             <li>Home</li>
@@ -22,10 +38,12 @@ function Header(){
                         </Link>
                     </ul>
                 </div>
-
-                <div className="cart">
-                    <FaShoppingCart/>
-                </div>
+                <Link to={"/cart"}>
+                    <div className="cart">
+                        <FaShoppingCart />
+                        <span>{totalItems}</span>
+                    </div>
+                </Link>
             </div>
         </>
     );

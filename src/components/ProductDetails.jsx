@@ -1,6 +1,8 @@
 import { useParams, useLocation} from "react-router";
 import "./style.css"; 
 import { useEffect, useState } from "react";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../reduxStore/features/cartSlice';
 
 export function ProductDetails() {
     const {product} = useParams();
@@ -10,6 +12,21 @@ export function ProductDetails() {
 
     const [load, loadStatus] = useState(true);
     const [listData, setData] = useState(null);
+
+// cart value update whenever item is added 
+// function ProductCard({ product }) {
+  const dispatch = useDispatch();
+
+  const handleAdd = () => {
+    dispatch(addToCart(
+        {
+        id: listData.products[product].id,
+        name: listData.products[product].title,
+        price: listData.products[product].price,
+        image: listData.products[product].thumbnail,
+    }));
+  };
+
 // fetching the data from url and displaying it
         useEffect(()=>{
             async function fetchData(){
@@ -31,11 +48,8 @@ export function ProductDetails() {
         },[product]); 
 
         // console.log(listData);
-        
-
     return(
         <>
-            {/* {load ? <p>Loading....</p> : <p>{listData.products[4].title}</p>} */}
             {load ? <p>Loading....</p>: 
                 <div className="product-container">
                     <div className="product-image">
@@ -50,7 +64,7 @@ export function ProductDetails() {
                         <p className="product-price">${listData.products[product].price}</p>
                         <p className="product-rating">Rating: {listData.products[product].rating} / 5</p>
                         <p className="product-category">Category: {listData.products[product].category}</p>
-                        <button className="add-cart">Add to cart</button>
+                        <button className="add-cart" onClick={handleAdd}>Add to cart</button>
                     </div>
                 </div>
             }; 

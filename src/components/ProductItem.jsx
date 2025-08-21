@@ -1,17 +1,24 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
 export function ProductItem(data){
-    const newData = data.data.data;
+    const newData = data.data.data.products;
     const newLoad = data.data.load;
     const newError = data.data.error;
-
+    const [search, setSearch] = useState("");
+    
     return(
         <>
             {/* <p>{newObj.products.map((item)=>item.title)}</p> */}
-            <h1>Product Item page...</h1>
+            <div className="head-bar">
+                <h1>Browse our products</h1>
+                <input type="text" placeholder="search products" onChange={(e)=>setSearch(e.target.value)}/>
+            </div>
             <div className="product-cont">
-           {newLoad ? <p>loading.....</p>: 
-           newData.products.map((item,ind)=>
+           {newLoad ? <p style={{textAlign: 'center'}}>Data is loading.....</p>:
+            newData.filter((item)=>{
+                return search === "" ? item : item.title.toLowerCase().includes(search.toLowerCase())
+            }).map((item,ind)=>
             <Link key={item.id} to={`/product/${ind}`} state={[newData, newLoad]}>
             <div key={item.id} className="prduct-card">
                 <img src={item.thumbnail} alt="" />
